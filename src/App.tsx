@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// Dependencies
+import { SWRConfig } from 'swr'
 
-function App() {
+// Components
+import PokeContainer from './Pokemon/PokeContainer'
+import fetcher from './Pokemon/fetcher'
+
+// Styles
+import { StyledPokedex, StyledTitle } from './Pokemon/Pokemon.styled'
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <> 
+      <StyledTitle>Pokedex</StyledTitle>     
+
+      <SWRConfig
+        value={{
+          fetcher,
+          suspense: true,
+        }}
+      >
+        <StyledPokedex>
+          <PokeContainer />
+        </StyledPokedex>
+      </SWRConfig>
+    </>
+  )
 }
 
-export default App;
+export default App
